@@ -21,6 +21,7 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getId(), actualCard.getId());
         assertEquals(expectedCard.getAddress(), actualCard.getAddress());
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
+        assertEquals(expectedCard.getIdNum(), actualCard.getIdNum());
         assertEquals(expectedCard.getName(), actualCard.getName());
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
@@ -33,9 +34,16 @@ public class GuiTestAssert {
         assertEquals(expectedCustomer.getName().fullName, actualCard.getName());
         assertEquals(expectedCustomer.getPhone().value, actualCard.getPhone());
         assertEquals(expectedCustomer.getEmail().value, actualCard.getEmail());
+<<<<<<< HEAD
         assertEquals(expectedCustomer.getAddress().value, actualCard.getAddress());
         assertEquals(expectedCustomer.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+=======
+        assertEquals(expectedCustomer.getIdNum().value, actualCard.getIdNum());
+        assertEquals(expectedCustomer.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedCustomer.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+            actualCard.getTags());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
     }
 
     /**

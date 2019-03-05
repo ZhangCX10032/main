@@ -2,18 +2,30 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+<<<<<<< HEAD
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Email;
+=======
+import seedu.address.model.booking.ServiceType;
+import seedu.address.model.customer.Address;
+import seedu.address.model.customer.Customer;
+import seedu.address.model.customer.Email;
+import seedu.address.model.customer.IdentificationNo;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.TimeRange;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +37,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -63,6 +76,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String idnum} into a {@code IdentificationNo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code idnum} is invalid.
+     */
+    public static IdentificationNo parseIdNum(String idnum) throws ParseException {
+        requireNonNull(idnum);
+        String trimmedIdNum = idnum.trim();
+        if (!IdentificationNo.isValidIdNum(trimmedIdNum)) {
+            throw new ParseException(IdentificationNo.MESSAGE_CONSTRAINTS);
+        }
+        return new IdentificationNo(trimmedIdNum);
     }
 
     /**
@@ -108,6 +136,67 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String serviceName} into a {@code ServiceType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code serviceName} is invalid.
+     */
+    public static ServiceType parseService(String serviceName) throws ParseException {
+        requireNonNull(serviceName);
+        String trimmedServiceName = serviceName.trim();
+        switch (trimmedServiceName) {
+        case "GYM":
+            return ServiceType.GYM;
+        case "SWIMMING POOL":
+            return ServiceType.POOL;
+        case "SPA":
+            return ServiceType.SPA;
+        case "GAMES ROOM":
+            return ServiceType.GAMES;
+        default:
+            throw new ParseException(String.format("Service Type %s doesn't exist!", trimmedServiceName));
+        }
+    }
+
+    /**
+     * Parses a {@code String timing} into a {@code TimeRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static TimeRange parseTiming(String timing) throws ParseException {
+        requireNonNull(timing);
+        String trimmedTiming = timing.trim();
+        String[] hours = trimmedTiming.split(" - ");
+        return new TimeRange(Integer.parseInt(hours[0]), Integer.parseInt(hours[1]));
+    }
+
+    /**
+     * Parses a {@code String timing} into a {@code TimeRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Customer parseCustomer(String customerIndex, List<Customer> customers) throws ParseException {
+        requireNonNull(customerIndex);
+        try {
+            int index = Integer.parseInt(customerIndex);
+            return customers.get(index);
+        } catch (Exception e) {
+            throw new ParseException(String.format("Invalid customer index - %s", customerIndex));
+        }
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Optional<List<Customer>> parseCustomers(Collection<String> customerIndices, List<Customer> customers)
+        throws ParseException {
+        requireNonNull(customerIndices);
+        final List<Customer> result = new ArrayList<>();
+        for (String customerIndex : customerIndices) {
+            result.add(customers.get(Integer.parseInt(customerIndex)));
+        }
+        return Optional.of(result);
     }
 
     /**

@@ -15,9 +15,13 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.model.CustomerManager;
+import seedu.address.model.CustomerModel;
 import seedu.address.model.UserPrefs;
+<<<<<<< HEAD
+=======
+import seedu.address.model.VersionedAddressBook;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Customer;
 
 /**
@@ -26,7 +30,8 @@ import seedu.address.model.customer.Customer;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private CustomerModel model = new CustomerManager(new VersionedAddressBook(getTypicalAddressBook()),
+        new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -36,7 +41,12 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
 
+<<<<<<< HEAD
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+=======
+        CustomerManager expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+            new UserPrefs());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         expectedModel.deleteCustomer(customerToDelete);
         expectedModel.commitAddressBook();
 
@@ -60,7 +70,12 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
 
+<<<<<<< HEAD
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+=======
+        CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+            new UserPrefs());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         expectedModel.deleteCustomer(customerToDelete);
         expectedModel.commitAddressBook();
         showNoCustomer(expectedModel);
@@ -85,7 +100,12 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+<<<<<<< HEAD
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+=======
+        CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+            new UserPrefs());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         expectedModel.deleteCustomer(customerToDelete);
         expectedModel.commitAddressBook();
 
@@ -124,7 +144,12 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameCustomerDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
+<<<<<<< HEAD
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+=======
+        CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+            new UserPrefs());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 
         showCustomerAtIndex(model, INDEX_SECOND_CUSTOMER);
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
@@ -169,7 +194,11 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
+<<<<<<< HEAD
     private void showNoCustomer(Model model) {
+=======
+    private void showNoCustomer(CustomerModel model) {
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         model.updateFilteredCustomerList(p -> false);
 
         assertTrue(model.getFilteredCustomerList().isEmpty());

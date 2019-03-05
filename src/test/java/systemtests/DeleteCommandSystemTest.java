@@ -17,28 +17,42 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+<<<<<<< HEAD
 import seedu.address.model.Model;
+=======
+import seedu.address.model.CustomerModel;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Customer;
 
 public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
-            String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
 
     @Test
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
         /* Case: delete the first customer in the list, command with leading spaces and trailing spaces -> deleted */
+<<<<<<< HEAD
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      "
                 + INDEX_FIRST_CUSTOMER.getOneBased() + "       ";
+=======
+        CustomerModel expectedModel = getModel();
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      "
+            + INDEX_FIRST_CUSTOMER.getOneBased() + "       ";
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         Customer deletedCustomer = removeCustomer(expectedModel, INDEX_FIRST_CUSTOMER);
         String expectedResultMessage = String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, deletedCustomer);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last customer in the list -> deleted */
+<<<<<<< HEAD
         Model modelBeforeDeletingLast = getModel();
+=======
+        CustomerModel modelBeforeDeletingLast = getModel();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         Index lastCustomerIndex = getLastIndex(modelBeforeDeletingLast);
         assertCommandSuccess(lastCustomerIndex);
 
@@ -98,7 +112,11 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
+<<<<<<< HEAD
                 getModel().getAddressBook().getCustomerList().size() + 1);
+=======
+            getModel().getAddressBook().getCustomerList().size() + 1);
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
 
@@ -114,9 +132,16 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
     /**
      * Removes the {@code Customer} at the specified {@code index} in {@code model}'s address book.
+<<<<<<< HEAD
      * @return the removed customer
      */
     private Customer removeCustomer(Model model, Index index) {
+=======
+     *
+     * @return the removed customer
+     */
+    private Customer removeCustomer(CustomerModel model, Index index) {
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         Customer targetCustomer = getCustomer(model, index);
         model.deleteCustomer(targetCustomer);
         return targetCustomer;
@@ -125,15 +150,20 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
     /**
      * Deletes the customer at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete} and
      * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
-     * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
+     *
+     * @see DeleteCommandSystemTest#assertCommandSuccess(String, CustomerModel, String)
      */
     private void assertCommandSuccess(Index toDelete) {
+<<<<<<< HEAD
         Model expectedModel = getModel();
+=======
+        CustomerModel expectedModel = getModel();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         Customer deletedCustomer = removeCustomer(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_CUSTOMER_SUCCESS, deletedCustomer);
 
         assertCommandSuccess(
-                DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+            DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
     }
 
     /**
@@ -145,20 +175,22 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     *
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, CustomerModel)
      */
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
+    private void assertCommandSuccess(String command, CustomerModel expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
-     * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
+     *
+     * @see DeleteCommandSystemTest#assertCommandSuccess(String, CustomerModel, String)
      * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
      */
-    private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
-            Index expectedSelectedCardIndex) {
+    private void assertCommandSuccess(String command, CustomerModel expectedModel, String expectedResultMessage,
+                                      Index expectedSelectedCardIndex) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
 
@@ -180,10 +212,11 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     *
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, CustomerModel)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
+        CustomerModel expectedModel = getModel();
 
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);

@@ -70,6 +70,10 @@ public class NameContainsKeywordsPredicateTest {
         // Keywords match phone, email and address, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new CustomerBuilder().withName("Alice").withPhone("12345")
+<<<<<<< HEAD:src/test/java/seedu/address/model/customer/NameContainsKeywordsPredicateTest.java
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
+=======
+            .withEmail("alice@email.com").withAddress("Main Street").build()));
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c:src/test/java/seedu/address/model/customer/NameContainsKeywordsPredicateTest.java
     }
 }

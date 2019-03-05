@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalCustomers.ALICE;
 import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,16 +22,18 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+<<<<<<< HEAD
+=======
+import seedu.address.model.booking.Booking;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.exceptions.DuplicateCustomerException;
 import seedu.address.testutil.CustomerBuilder;
 
 public class AddressBookTest {
-
+    private final AddressBook addressBook = new AddressBook();
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
-    private final AddressBook addressBook = new AddressBook();
 
     @Test
     public void constructor() {
@@ -45,7 +48,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        AddressBook newData = new VersionedAddressBook(getTypicalAddressBook());
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -54,9 +57,15 @@ public class AddressBookTest {
     public void resetData_withDuplicateCustomers_throwsDuplicateCustomerException() {
         // Two customers with the same identity fields
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+<<<<<<< HEAD
                 .build();
         List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newCustomers);
+=======
+            .build();
+        List<Customer> newCustomers = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newCustomers, new ArrayList<>());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 
         thrown.expect(DuplicateCustomerException.class);
         addressBook.resetData(newData);
@@ -83,7 +92,11 @@ public class AddressBookTest {
     public void hasCustomer_customerWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addCustomer(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+<<<<<<< HEAD
                 .build();
+=======
+            .build();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         assertTrue(addressBook.hasCustomer(editedAlice));
     }
 
@@ -117,6 +130,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Customer> customers = FXCollections.observableArrayList();
+<<<<<<< HEAD
 
         AddressBookStub(Collection<Customer> customers) {
             this.customers.setAll(customers);
@@ -125,6 +139,23 @@ public class AddressBookTest {
         @Override
         public ObservableList<Customer> getCustomerList() {
             return customers;
+=======
+        private final ObservableList<Booking> bookings = FXCollections.observableArrayList();
+
+        AddressBookStub(Collection<Customer> customers, Collection<Booking> bookings) {
+            this.customers.setAll(customers);
+            this.bookings.setAll(bookings);
+        }
+
+        @Override
+        public ObservableList<Customer> getCustomerList() {
+            return customers;
+        }
+
+        @Override
+        public ObservableList<Booking> getBookingList() {
+            return bookings;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         }
 
         @Override

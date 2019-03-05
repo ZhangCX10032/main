@@ -16,7 +16,11 @@ public class CustomerCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
+<<<<<<< HEAD
         Customer customerWithNoTags = new CustomerBuilder().withTags(new String[0]).build();
+=======
+        Customer customerWithNoTags = new CustomerBuilder().withTags().build();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         CustomerCard customerCard = new CustomerCard(customerWithNoTags, 1);
         uiPartRule.setUiPart(customerCard);
         assertCardDisplay(customerCard, customerWithNoTags, 1);
@@ -64,7 +68,11 @@ public class CustomerCardTest extends GuiUnitTest {
         CustomerCardHandle customerCardHandle = new CustomerCardHandle(customerCard.getRoot());
 
         // verify id is displayed correctly
+<<<<<<< HEAD
         assertEquals(Integer.toString(expectedId) + ". ", customerCardHandle.getId());
+=======
+        assertEquals(expectedId + ". ", customerCardHandle.getId());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 
         // verify customer details are displayed correctly
         assertCardDisplaysCustomer(expectedCustomer, customerCardHandle);

@@ -18,14 +18,18 @@ public class NameContainsKeywordsPredicate implements Predicate<Customer> {
     @Override
     public boolean test(Customer customer) {
         return keywords.stream()
+<<<<<<< HEAD:src/main/java/seedu/address/model/customer/NameContainsKeywordsPredicate.java
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(customer.getName().fullName, keyword));
+=======
+            .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(customer.getName().fullName, keyword));
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c:src/main/java/seedu/address/model/customer/NameContainsKeywordsPredicate.java
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+            || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
+            && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }

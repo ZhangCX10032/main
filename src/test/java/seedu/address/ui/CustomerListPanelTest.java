@@ -20,12 +20,20 @@ import javafx.collections.ObservableList;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.Email;
+<<<<<<< HEAD
+=======
+import seedu.address.model.customer.IdentificationNo;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
 
 public class CustomerListPanelTest extends GuiUnitTest {
     private static final ObservableList<Customer> TYPICAL_CUSTOMERS =
+<<<<<<< HEAD
             FXCollections.observableList(getTypicalCustomers());
+=======
+        FXCollections.observableList(getTypicalCustomers());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
@@ -42,7 +50,11 @@ public class CustomerListPanelTest extends GuiUnitTest {
             CustomerCardHandle actualCard = customerListPanelHandle.getCustomerCardHandle(i);
 
             assertCardDisplaysCustomer(expectedCustomer, actualCard);
+<<<<<<< HEAD
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
+=======
+            assertEquals((i + 1) + ". ", actualCard.getId());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         }
     }
 
@@ -53,7 +65,11 @@ public class CustomerListPanelTest extends GuiUnitTest {
         guiRobot.interact(() -> selectedCustomer.set(secondCustomer));
         guiRobot.pauseForHuman();
         CustomerCardHandle expectedCustomer =
+<<<<<<< HEAD
                 customerListPanelHandle.getCustomerCardHandle(INDEX_SECOND_CUSTOMER.getZeroBased());
+=======
+            customerListPanelHandle.getCustomerCardHandle(INDEX_SECOND_CUSTOMER.getZeroBased());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         CustomerCardHandle selectedCustomer = customerListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedCustomer, selectedCustomer);
     }
@@ -82,8 +98,14 @@ public class CustomerListPanelTest extends GuiUnitTest {
             Name name = new Name(i + "a");
             Phone phone = new Phone("000");
             Email email = new Email("a@aa");
+<<<<<<< HEAD
             Address address = new Address("a");
             Customer customer = new Customer(name, phone, email, address, Collections.emptySet());
+=======
+            IdentificationNo idnum = new IdentificationNo("1234");
+            Address address = new Address("a");
+            Customer customer = new Customer(name, phone, email, idnum, address, Collections.emptySet());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
             backingList.add(customer);
         }
         return backingList;
@@ -95,10 +117,18 @@ public class CustomerListPanelTest extends GuiUnitTest {
      */
     private void initUi(ObservableList<Customer> backingList) {
         CustomerListPanel customerListPanel =
+<<<<<<< HEAD
                 new CustomerListPanel(backingList, selectedCustomer, selectedCustomer::set);
         uiPartRule.setUiPart(customerListPanel);
 
         customerListPanelHandle = new CustomerListPanelHandle(getChildNode(customerListPanel.getRoot(),
                 CustomerListPanelHandle.CUSTOMER_LIST_VIEW_ID));
+=======
+            new CustomerListPanel(backingList, selectedCustomer, selectedCustomer::set);
+        uiPartRule.setUiPart(customerListPanel);
+
+        customerListPanelHandle = new CustomerListPanelHandle(getChildNode(customerListPanel.getRoot(),
+            CustomerListPanelHandle.CUSTOMER_LIST_VIEW_ID));
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
     }
 }

@@ -21,11 +21,18 @@ import seedu.address.model.customer.exceptions.DuplicateCustomerException;
 import seedu.address.testutil.CustomerBuilder;
 
 public class UniqueCustomerListTest {
+<<<<<<< HEAD
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private final UniqueCustomerList uniqueCustomerList = new UniqueCustomerList();
 
+=======
+    private final UniqueCustomerList uniqueCustomerList = new UniqueCustomerList();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
     @Test
     public void containsNullCustomerThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -47,7 +54,11 @@ public class UniqueCustomerListTest {
     public void containsCustomerWithSameIdentityFieldsInListReturnsTrue() {
         uniqueCustomerList.add(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+<<<<<<< HEAD
                 .build();
+=======
+            .build();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         assertTrue(uniqueCustomerList.contains(editedAlice));
     }
 
@@ -95,7 +106,11 @@ public class UniqueCustomerListTest {
     public void setCustomerEditedCustomerHasSameIdentitySuccess() {
         uniqueCustomerList.add(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+<<<<<<< HEAD
                 .build();
+=======
+            .build();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         uniqueCustomerList.setCustomer(ALICE, editedAlice);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(editedAlice);

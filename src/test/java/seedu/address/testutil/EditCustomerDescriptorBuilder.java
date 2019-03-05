@@ -8,6 +8,10 @@ import seedu.address.logic.commands.EditCommand.EditCustomerDescriptor;
 import seedu.address.model.customer.Address;
 import seedu.address.model.customer.Customer;
 import seedu.address.model.customer.Email;
+<<<<<<< HEAD
+=======
+import seedu.address.model.customer.IdentificationNo;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Name;
 import seedu.address.model.customer.Phone;
 import seedu.address.model.tag.Tag;
@@ -35,6 +39,10 @@ public class EditCustomerDescriptorBuilder {
         descriptor.setName(customer.getName());
         descriptor.setPhone(customer.getPhone());
         descriptor.setEmail(customer.getEmail());
+<<<<<<< HEAD
+=======
+        descriptor.setIdNum(customer.getIdNum());
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         descriptor.setAddress(customer.getAddress());
         descriptor.setTags(customer.getTags());
     }
@@ -56,6 +64,17 @@ public class EditCustomerDescriptorBuilder {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Sets the {@code IdentificationNo} of the {@code EditCustomerDescriptor} that we are building.
+     */
+    public EditCustomerDescriptorBuilder withIdNum(String idnum) {
+        descriptor.setIdNum(new IdentificationNo(idnum));
+        return this;
+    }
+
+    /**
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
      * Sets the {@code Email} of the {@code EditCustomerDescriptor} that we are building.
      */
     public EditCustomerDescriptorBuilder withEmail(String email) {

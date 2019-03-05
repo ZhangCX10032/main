@@ -17,10 +17,11 @@ import seedu.address.model.customer.Customer;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
@@ -31,7 +32,13 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+<<<<<<< HEAD
     /** Returns an unmodifiable view of the filtered list of customers */
+=======
+    /**
+     * Returns an unmodifiable view of the filtered list of customers
+     */
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
     ObservableList<Customer> getFilteredCustomerList();
 
     /**
@@ -59,14 +66,22 @@ public interface Logic {
      * Selected customer in the filtered customer list.
      * null if no customer is selected.
      *
+<<<<<<< HEAD
      * @see seedu.address.model.Model#selectedCustomerProperty()
+=======
+     * @see seedu.address.model.CustomerModel#selectedCustomerProperty()
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
      */
     ReadOnlyProperty<Customer> selectedCustomerProperty();
 
     /**
      * Sets the selected customer in the filtered customer list.
      *
+<<<<<<< HEAD
      * @see seedu.address.model.Model#setSelectedCustomer(Customer)
+=======
+     * @see seedu.address.model.CustomerModel#setSelectedCustomer(Customer)
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
      */
     void setSelectedCustomer(Customer customer);
 }

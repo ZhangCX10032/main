@@ -3,27 +3,38 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+<<<<<<< HEAD
+=======
+import seedu.address.model.booking.Booking;
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 import seedu.address.model.customer.Customer;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
+<<<<<<< HEAD
     /** {@code Predicate} that always evaluate to true */
     Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
 
+=======
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * {@code Predicate} that always evaluate to true
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
+    Predicate<Booking> PREDICATE_SHOW_ALL_BOOKINGS = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -46,14 +57,12 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Returns the AddressBook
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
     /**
+<<<<<<< HEAD
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
     boolean hasCustomer(Customer customer);
@@ -86,6 +95,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCustomerList(Predicate<Customer> predicate);
+=======
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setAddressBook(ReadOnlyAddressBook addressBook);
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -111,6 +125,7 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+<<<<<<< HEAD
 
     /**
      * Selected customer in the filtered customer list.
@@ -128,4 +143,6 @@ public interface Model {
      * Sets the selected customer in the filtered customer list.
      */
     void setSelectedCustomer(Customer customer);
+=======
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 }

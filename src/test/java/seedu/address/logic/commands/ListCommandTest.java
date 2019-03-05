@@ -9,23 +9,24 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import seedu.address.model.CustomerManager;
+import seedu.address.model.CustomerModel;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.VersionedAddressBook;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class ListCommandTest {
 
-    private Model model;
-    private Model expectedModel;
+    private CustomerModel model;
+    private CustomerModel expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new CustomerManager(new VersionedAddressBook(getTypicalAddressBook()), new UserPrefs());
+        expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(), new UserPrefs());
     }
 
     @Test

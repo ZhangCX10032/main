@@ -35,6 +35,8 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
+    private Label identificationNo;
+    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
@@ -45,6 +47,10 @@ public class CustomerCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(customer.getName().fullName);
         phone.setText(customer.getPhone().value);
+<<<<<<< HEAD:src/main/java/seedu/address/ui/CustomerCard.java
+=======
+        identificationNo.setText(customer.getIdNum().value);
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c:src/main/java/seedu/address/ui/CustomerCard.java
         address.setText(customer.getAddress().value);
         email.setText(customer.getEmail().value);
         customer.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -65,6 +71,10 @@ public class CustomerCard extends UiPart<Region> {
         // state check
         CustomerCard card = (CustomerCard) other;
         return id.getText().equals(card.id.getText())
+<<<<<<< HEAD:src/main/java/seedu/address/ui/CustomerCard.java
                 && customer.equals(card.customer);
+=======
+            && customer.equals(card.customer);
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c:src/main/java/seedu/address/ui/CustomerCard.java
     }
 }

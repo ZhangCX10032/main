@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -36,11 +37,22 @@ public class EditCustomerDescriptorTest {
 
         // different name -> returns false
         EditCommand.EditCustomerDescriptor editedAmy =
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCustomerDescriptorTest.java
                 new EditCustomerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+=======
+            new EditCustomerDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c:src/test/java/seedu/address/logic/commands/EditCustomerDescriptorTest.java
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
         editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditCustomerDescriptorTest.java
+=======
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different id -> returns false
+        editedAmy = new EditCustomerDescriptorBuilder(DESC_AMY).withIdNum(VALID_ID_BOB).build();
+>>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c:src/test/java/seedu/address/logic/commands/EditCustomerDescriptorTest.java
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
