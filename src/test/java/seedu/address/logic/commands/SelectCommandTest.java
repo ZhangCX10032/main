@@ -5,29 +5,26 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CUSTOMER;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.CustomerManager;
-import seedu.address.model.CustomerModel;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.VersionedAddressBook;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
 public class SelectCommandTest {
-    private CustomerModel model = new CustomerManager(
-            new VersionedAddressBook(getTypicalAddressBook()), new UserPrefs());
-    private CustomerModel expectedModel = new CustomerManager(
-            new VersionedAddressBook(getTypicalAddressBook()), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -90,8 +87,7 @@ public class SelectCommandTest {
 
     /**
      * Executes a {@code SelectCommand} with the given {@code index},
-     * and checks that the model's selected customer is set to the customer at {@code index} in the filtered customer
-     * list.
+     * and checks that the model's selected customer is set to the customer at {@code index} in the filtered customer list.
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);

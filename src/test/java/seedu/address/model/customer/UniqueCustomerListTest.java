@@ -16,8 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.customer.exceptions.CustomerNotFoundException;
 import seedu.address.model.customer.exceptions.DuplicateCustomerException;
+import seedu.address.model.customer.exceptions.CustomerNotFoundException;
 import seedu.address.testutil.CustomerBuilder;
 
 public class UniqueCustomerListTest {
@@ -40,7 +40,6 @@ public class UniqueCustomerListTest {
     @Test
     public void containsCustomerInListReturnsTrue() {
         uniqueCustomerList.add(ALICE);
-
         assertTrue(uniqueCustomerList.contains(ALICE));
     }
 
@@ -48,7 +47,7 @@ public class UniqueCustomerListTest {
     public void containsCustomerWithSameIdentityFieldsInListReturnsTrue() {
         uniqueCustomerList.add(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-            .build();
+                .build();
         assertTrue(uniqueCustomerList.contains(editedAlice));
     }
 
@@ -96,7 +95,7 @@ public class UniqueCustomerListTest {
     public void setCustomerEditedCustomerHasSameIdentitySuccess() {
         uniqueCustomerList.add(ALICE);
         Customer editedAlice = new CustomerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-            .build();
+                .build();
         uniqueCustomerList.setCustomer(ALICE, editedAlice);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(editedAlice);

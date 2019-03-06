@@ -10,11 +10,10 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.CustomerManager;
-import seedu.address.model.CustomerModel;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.VersionedAddressBook;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.testutil.TestUtil;
@@ -29,7 +28,7 @@ public class TestApp extends MainApp {
     public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.json");
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
-        TestUtil.getFilePathInSandboxFolder("pref_testing.json");
+            TestUtil.getFilePathInSandboxFolder("pref_testing.json");
     protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
@@ -50,10 +49,6 @@ public class TestApp extends MainApp {
                 throw new AssertionError(ioe);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     @Override
@@ -96,16 +91,19 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the model.
      */
-    public CustomerModel getModel() {
-        CustomerModel copy = new CustomerManager((VersionedAddressBook) customerModel.getAddressBook(),
-            new UserPrefs());
-        ModelHelper.setFilteredList(copy, customerModel.getFilteredCustomerList());
+    public Model getModel() {
+        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        ModelHelper.setFilteredList(copy, model.getFilteredCustomerList());
         return copy;
     }
 
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
 }

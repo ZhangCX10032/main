@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTIFICATION_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -20,36 +19,31 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.CustomerModel;
-import seedu.address.model.customer.Address;
+import seedu.address.model.Model;
+import seedu.address.model.customer.*;
 import seedu.address.model.customer.Customer;
-import seedu.address.model.customer.Email;
-import seedu.address.model.customer.IdentificationNo;
-import seedu.address.model.customer.Name;
-import seedu.address.model.customer.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing customer in the address book.
  */
-public class EditCommand extends CustomerCommand {
+public class EditCommand extends Command {
 
-    public static final String COMMAND_ALIAS = "ec";
-    public static final String COMMAND_WORD = "editcustomer";
+    public static final String COMMAND_ALIAS = "ed";
+    public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the customer identified "
-        + "by the index number used in the displayed customer list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_NAME + "NAME] "
-        + "[" + PREFIX_PHONE + "PHONE] "
-        + "[" + PREFIX_EMAIL + "EMAIL] "
-        + "[" + PREFIX_IDENTIFICATION_NUMBER + "IDENTIFICATIONNO] "
-        + "[" + PREFIX_ADDRESS + "ADDRESS] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_PHONE + "91234567 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+            + "by the index number used in the displayed customer list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_CUSTOMER_SUCCESS = "Edited Customer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -59,7 +53,7 @@ public class EditCommand extends CustomerCommand {
     private final EditCustomerDescriptor editCustomerDescriptor;
 
     /**
-     * @param index                  of the customer in the filtered customer list to edit
+     * @param index of the customer in the filtered customer list to edit
      * @param editCustomerDescriptor details to edit the customer with
      */
     public EditCommand(Index index, EditCustomerDescriptor editCustomerDescriptor) {
@@ -70,26 +64,8 @@ public class EditCommand extends CustomerCommand {
         this.editCustomerDescriptor = new EditCustomerDescriptor(editCustomerDescriptor);
     }
 
-    /**
-     * Creates and returns a {@code Customer} with the details of {@code customerToEdit}
-     * edited with {@code editCustomerDescriptor}.
-     */
-    private static Customer createEditedCustomer(Customer customerToEdit,
-                                                 EditCustomerDescriptor editCustomerDescriptor) {
-        assert customerToEdit != null;
-
-        Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
-        Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
-        Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
-        IdentificationNo updatedIdNum = editCustomerDescriptor.getIdNum().orElse(customerToEdit.getIdNum());
-        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
-        Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
-
-        return new Customer(updatedName, updatedPhone, updatedEmail, updatedIdNum, updatedAddress, updatedTags);
-    }
-
     @Override
-    public CommandResult execute(CustomerModel model, CommandHistory history) throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Customer> lastShownList = model.getFilteredCustomerList();
 
@@ -110,6 +86,22 @@ public class EditCommand extends CustomerCommand {
         return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer));
     }
 
+    /**
+     * Creates and returns a {@code Customer} with the details of {@code customerToEdit}
+     * edited with {@code editCustomerDescriptor}.
+     */
+    private static Customer createEditedCustomer(Customer customerToEdit, EditCustomerDescriptor editCustomerDescriptor) {
+        assert customerToEdit != null;
+
+        Name updatedName = editCustomerDescriptor.getName().orElse(customerToEdit.getName());
+        Phone updatedPhone = editCustomerDescriptor.getPhone().orElse(customerToEdit.getPhone());
+        Email updatedEmail = editCustomerDescriptor.getEmail().orElse(customerToEdit.getEmail());
+        Address updatedAddress = editCustomerDescriptor.getAddress().orElse(customerToEdit.getAddress());
+        Set<Tag> updatedTags = editCustomerDescriptor.getTags().orElse(customerToEdit.getTags());
+
+        return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -125,7 +117,7 @@ public class EditCommand extends CustomerCommand {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-            && editCustomerDescriptor.equals(e.editCustomerDescriptor);
+                && editCustomerDescriptor.equals(e.editCustomerDescriptor);
     }
 
     /**
@@ -136,12 +128,10 @@ public class EditCommand extends CustomerCommand {
         private Name name;
         private Phone phone;
         private Email email;
-        private IdentificationNo idnum;
         private Address address;
         private Set<Tag> tags;
 
-        public EditCustomerDescriptor() {
-        }
+        public EditCustomerDescriptor() {}
 
         /**
          * Copy constructor.
@@ -151,7 +141,6 @@ public class EditCommand extends CustomerCommand {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setIdNum(toCopy.idnum);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
         }
@@ -160,47 +149,47 @@ public class EditCommand extends CustomerCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, idnum, address, tags);
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
             this.name = name;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Name> getName() {
+            return Optional.ofNullable(name);
         }
 
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
 
-        public Optional<IdentificationNo> getIdNum() {
-            return Optional.ofNullable(idnum);
+        public Optional<Phone> getPhone() {
+            return Optional.ofNullable(phone);
         }
 
         public void setEmail(Email email) {
             this.email = email;
         }
 
-        public void setIdNum(IdentificationNo idnum) {
-            this.idnum = idnum;
+        public Optional<Email> getEmail() {
+            return Optional.ofNullable(email);
+        }
+
+        public void setAddress(Address address) {
+            this.address = address;
         }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
@@ -210,14 +199,6 @@ public class EditCommand extends CustomerCommand {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         @Override
@@ -236,11 +217,10 @@ public class EditCommand extends CustomerCommand {
             EditCustomerDescriptor e = (EditCustomerDescriptor) other;
 
             return getName().equals(e.getName())
-                && getPhone().equals(e.getPhone())
-                && getEmail().equals(e.getEmail())
-                && getIdNum().equals(e.getIdNum())
-                && getAddress().equals(e.getAddress())
-                && getTags().equals(e.getTags());
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags());
         }
     }
 }

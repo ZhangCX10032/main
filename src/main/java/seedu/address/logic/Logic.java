@@ -9,7 +9,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.booking.Booking;
 import seedu.address.model.customer.Customer;
 
 /**
@@ -18,11 +17,10 @@ import seedu.address.model.customer.Customer;
 public interface Logic {
     /**
      * Executes the command and returns the result.
-     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException   If an error occurs during parsing.
+     * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
@@ -33,15 +31,8 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /**
-     * Returns an unmodifiable view of the filtered list of customers
-     */
+    /** Returns an unmodifiable view of the filtered list of customers */
     ObservableList<Customer> getFilteredCustomerList();
-
-    /**
-     * Returns an unmodifiable view of the filtered list of bookings
-     */
-    ObservableList<Booking> getFilteredBookingList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -68,29 +59,14 @@ public interface Logic {
      * Selected customer in the filtered customer list.
      * null if no customer is selected.
      *
-     * @see seedu.address.model.CustomerModel#selectedCustomerProperty()
+     * @see seedu.address.model.Model#selectedCustomerProperty()
      */
     ReadOnlyProperty<Customer> selectedCustomerProperty();
 
     /**
-     * Selected bookings in the filtered booking list.
-     * null if no booking is selected.
-     *
-     * @see seedu.address.model.CustomerModel#selectedCustomerProperty()
-     */
-    ReadOnlyProperty<Booking> selectedBookingProperty();
-
-    /**
      * Sets the selected customer in the filtered customer list.
      *
-     * @see seedu.address.model.CustomerModel#setSelectedCustomer(Customer)
+     * @see seedu.address.model.Model#setSelectedCustomer(Customer)
      */
     void setSelectedCustomer(Customer customer);
-
-    /**
-     * Sets the selected customer in the filtered customer list.
-     *
-     * @see seedu.address.model.BookingModel#setSelectedBooking(Booking)
-     */
-    void setSelectedBooking(Booking booking);
 }

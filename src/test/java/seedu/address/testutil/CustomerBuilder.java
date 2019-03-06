@@ -3,12 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.customer.Address;
+import seedu.address.model.customer.*;
 import seedu.address.model.customer.Customer;
-import seedu.address.model.customer.Email;
-import seedu.address.model.customer.IdentificationNo;
-import seedu.address.model.customer.Name;
-import seedu.address.model.customer.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,13 +16,11 @@ public class CustomerBuilder {
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_IDENTIFICATION_N0 = "1223453";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private IdentificationNo idnum;
     private Address address;
     private Set<Tag> tags;
 
@@ -34,7 +28,6 @@ public class CustomerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        idnum = new IdentificationNo(DEFAULT_IDENTIFICATION_N0);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -46,7 +39,6 @@ public class CustomerBuilder {
         name = customerToCopy.getName();
         phone = customerToCopy.getPhone();
         email = customerToCopy.getEmail();
-        idnum = customerToCopy.getIdNum();
         address = customerToCopy.getAddress();
         tags = new HashSet<>(customerToCopy.getTags());
     }
@@ -62,7 +54,7 @@ public class CustomerBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Customer} that we are building.
      */
-    public CustomerBuilder withTags(String... tags) {
+    public CustomerBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -84,14 +76,6 @@ public class CustomerBuilder {
     }
 
     /**
-     * Sets the {@code IdentificationNo} of the {@code Customer} that we are building.
-     */
-    public CustomerBuilder withIdNum(String idnum) {
-        this.idnum = new IdentificationNo(idnum);
-        return this;
-    }
-
-    /**
      * Sets the {@code Email} of the {@code Customer} that we are building.
      */
     public CustomerBuilder withEmail(String email) {
@@ -100,7 +84,7 @@ public class CustomerBuilder {
     }
 
     public Customer build() {
-        return new Customer(name, phone, email, idnum, address, tags);
+        return new Customer(name, phone, email, address, tags);
     }
 
 }

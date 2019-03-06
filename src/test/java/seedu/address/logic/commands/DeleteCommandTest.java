@@ -6,19 +6,18 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCustomerAtIndex;
-import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.CustomerManager;
-import seedu.address.model.CustomerModel;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.customer.Customer;
 
 /**
@@ -27,8 +26,7 @@ import seedu.address.model.customer.Customer;
  */
 public class DeleteCommandTest {
 
-    private CustomerModel model = new CustomerManager(new VersionedAddressBook(getTypicalAddressBook()),
-        new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -38,8 +36,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
 
-        CustomerManager expectedModel = new CustomerManager(new VersionedAddressBook(model.getAddressBook()),
-            new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
         expectedModel.commitAddressBook();
 
@@ -63,8 +60,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
 
-        CustomerModel expectedModel = new CustomerManager(new VersionedAddressBook(model.getAddressBook()),
-            new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
         expectedModel.commitAddressBook();
         showNoCustomer(expectedModel);
@@ -89,8 +85,7 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
-        CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
-            new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteCustomer(customerToDelete);
         expectedModel.commitAddressBook();
 
@@ -129,8 +124,7 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameCustomerDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
-        CustomerModel expectedModel = new CustomerManager(new VersionedAddressBook(model.getAddressBook()),
-            new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         showCustomerAtIndex(model, INDEX_SECOND_CUSTOMER);
         Customer customerToDelete = model.getFilteredCustomerList().get(INDEX_FIRST_CUSTOMER.getZeroBased());
@@ -175,7 +169,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoCustomer(CustomerModel model) {
+    private void showNoCustomer(Model model) {
         model.updateFilteredCustomerList(p -> false);
 
         assertTrue(model.getFilteredCustomerList().isEmpty());

@@ -8,10 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.CustomerManager;
-import seedu.address.model.CustomerModel;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.customer.Customer;
 import seedu.address.testutil.CustomerBuilder;
 
@@ -20,38 +19,31 @@ import seedu.address.testutil.CustomerBuilder;
  */
 public class AddCommandIntegrationTest {
 
-    private CustomerModel model;
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
     @Before
     public void setUp() {
-        model = new CustomerManager(new VersionedAddressBook(getTypicalAddressBook()), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newCustomer_success() {
-        Customer validCustomer = new CustomerBuilder()
-                .withName("Unique Name")
-                .withPhone("9293292")
-                .withEmail("unique@name.com")
-                .withIdNum("9292392")
-                .withAddress("2, New Place, #01-321")
-                .build();
-        System.out.println(validCustomer);
-        CustomerModel expectedModel = new CustomerManager(
-                new VersionedAddressBook(model.getAddressBook()), new UserPrefs());
+        Customer validCustomer = new CustomerBuilder().build();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addCustomer(validCustomer);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validCustomer), model, commandHistory,
-            String.format(AddCommand.MESSAGE_SUCCESS, validCustomer), expectedModel);
+                String.format(AddCommand.MESSAGE_SUCCESS, validCustomer), expectedModel);
     }
 
     @Test
     public void execute_duplicateCustomer_throwsCommandException() {
         Customer customerInList = model.getAddressBook().getCustomerList().get(0);
         assertCommandFailure(new AddCommand(customerInList), model, commandHistory,
-            AddCommand.MESSAGE_DUPLICATE_CUSTOMER);
+                AddCommand.MESSAGE_DUPLICATE_CUSTOMER);
     }
 
 }
