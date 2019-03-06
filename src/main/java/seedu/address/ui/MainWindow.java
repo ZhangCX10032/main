@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private CustomerListPanel customerListPanel;
+    private BookingListPanel bookingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane customerListPanelPlaceholder;
+
+    @FXML
+    private StackPane bookingListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -123,6 +127,10 @@ public class MainWindow extends UiPart<Stage> {
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         customerListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
 
+        bookingListPanel = new BookingListPanel(logic.getFilteredBookingList(), logic.selectedBookingProperty(),
+                logic::setSelectedBooking);
+        bookingListPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -179,6 +187,10 @@ public class MainWindow extends UiPart<Stage> {
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
     public CustomerListPanel getCustomerListPanel() {
         return customerListPanel;
+    }
+
+    public BookingListPanel getBookingListPanel() {
+        return bookingListPanel;
     }
 
     /**

@@ -33,6 +33,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newCustomer_success() {
+<<<<<<< HEAD
         Customer validCustomer = new CustomerBuilder().build();
 
 <<<<<<< HEAD
@@ -41,6 +42,18 @@ public class AddCommandIntegrationTest {
         CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
             new UserPrefs());
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
+=======
+        Customer validCustomer = new CustomerBuilder()
+                .withName("Unique Name")
+                .withPhone("9293292")
+                .withEmail("unique@name.com")
+                .withIdNum("9292392")
+                .withAddress("2, New Place, #01-321")
+                .build();
+        System.out.println(validCustomer);
+        CustomerModel expectedModel = new CustomerManager(
+                new VersionedAddressBook(model.getAddressBook()), new UserPrefs());
+>>>>>>> 19116c6b0ee10bb254ad70d84cc773ce75d25e48
         expectedModel.addCustomer(validCustomer);
         expectedModel.commitAddressBook();
 

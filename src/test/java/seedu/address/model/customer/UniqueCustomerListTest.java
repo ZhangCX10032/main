@@ -22,6 +22,7 @@ import seedu.address.testutil.CustomerBuilder;
 
 public class UniqueCustomerListTest {
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -33,6 +34,13 @@ public class UniqueCustomerListTest {
     public ExpectedException thrown = ExpectedException.none();
 
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
+=======
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    private final UniqueCustomerList uniqueCustomerList = new UniqueCustomerList();
+
+>>>>>>> 19116c6b0ee10bb254ad70d84cc773ce75d25e48
     @Test
     public void containsNullCustomerThrowsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -47,6 +55,7 @@ public class UniqueCustomerListTest {
     @Test
     public void containsCustomerInListReturnsTrue() {
         uniqueCustomerList.add(ALICE);
+
         assertTrue(uniqueCustomerList.contains(ALICE));
     }
 

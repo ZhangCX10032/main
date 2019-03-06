@@ -42,9 +42,13 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 =======
         CustomerManager expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+=======
+        CustomerManager expectedModel = new CustomerManager(new VersionedAddressBook(model.getAddressBook()),
+>>>>>>> 19116c6b0ee10bb254ad70d84cc773ce75d25e48
             new UserPrefs());
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         expectedModel.deleteCustomer(customerToDelete);
@@ -71,9 +75,13 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CUSTOMER_SUCCESS, customerToDelete);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 =======
         CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+=======
+        CustomerModel expectedModel = new CustomerManager(new VersionedAddressBook(model.getAddressBook()),
+>>>>>>> 19116c6b0ee10bb254ad70d84cc773ce75d25e48
             new UserPrefs());
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
         expectedModel.deleteCustomer(customerToDelete);
@@ -145,9 +153,13 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexFilteredList_sameCustomerDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CUSTOMER);
 <<<<<<< HEAD
+<<<<<<< HEAD
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 =======
         CustomerModel expectedModel = new CustomerManager((VersionedAddressBook) model.getAddressBook(),
+=======
+        CustomerModel expectedModel = new CustomerManager(new VersionedAddressBook(model.getAddressBook()),
+>>>>>>> 19116c6b0ee10bb254ad70d84cc773ce75d25e48
             new UserPrefs());
 >>>>>>> cbebf3c46e02dcd016ad08f56b59fa61c34d5b6c
 
